@@ -10,7 +10,9 @@ namespace Lms.Core.Dto
    public class ModuleDto
     {
         public string Title { get; set; }
+
         public DateTime StartDate { get; set; }
+
         public DateTime EndDate
         {
             get { return StartDate.AddMonths(1); }
@@ -18,6 +20,5 @@ namespace Lms.Core.Dto
         }
     
         public int CourseId { get; set; }
-
     }
 }

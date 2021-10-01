@@ -33,8 +33,11 @@ namespace Lms.Api.Controllers
 
 
 
+
+
+
         /*
-        To get Courses  in list 
+        1.) To get Courses  in list 
         // GET: api/Courses
         [HttpGet]
         //public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
@@ -45,7 +48,6 @@ namespace Lms.Api.Controllers
         }
         */
         // GET: api/Courses
-
         
          [HttpGet]
          public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
@@ -54,6 +56,14 @@ namespace Lms.Api.Controllers
              var courseDto = mapper.Map<IEnumerable<CourseDto>>(course);
              return Ok(courseDto); 
          }
+
+
+
+
+
+
+
+        //Get courses with or withour modules
         /*
         [HttpGet]
   
@@ -66,8 +76,14 @@ namespace Lms.Api.Controllers
         }
         */
 
+
+
+
+
+
+
         /*
-        To get one course by id 
+        1.) To get one course by id 
         // GET: api/Courses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
@@ -82,6 +98,7 @@ namespace Lms.Api.Controllers
             return course;
         }
         */
+
         // GET: api/Courses/5
         //get a course by title
         [HttpGet("{title}")]
@@ -103,8 +120,11 @@ namespace Lms.Api.Controllers
 
 
 
+
+
+
         /*
-        To modify one course    
+        1.) To modify one course    
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -136,6 +156,7 @@ namespace Lms.Api.Controllers
             return NoContent();
         }
         */
+
         //Modify one course found by title
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -152,14 +173,17 @@ namespace Lms.Api.Controllers
 
             if (await uow.CompleteAsync()) return Ok(mapper.Map<CourseDto>(course));            
             
-            else return StatusCode(500);
-           
+            else return StatusCode(500);           
         }
 
 
 
+
+
+
+
         /*
-         Add a course 
+        1.) Add a course 
          // POST: api/Courses
          // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
          [HttpPost]
@@ -174,6 +198,7 @@ namespace Lms.Api.Controllers
              return CreatedAtAction("GetCourse", new { id = course.Id }, course);
          }
         */
+
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -202,8 +227,13 @@ namespace Lms.Api.Controllers
         }
 
 
+
+
+
+
+
         /*
-         Delete a course 
+         1.) Delete a course 
             // DELETE: api/Courses/5
             [HttpDelete("{id}")]
             public async Task<IActionResult> DeleteCourse(int id)
@@ -225,6 +255,7 @@ namespace Lms.Api.Controllers
                 return NoContent();
             }
         */
+
         // DELETE: api/Courses/5
         [HttpDelete("{title}")]
         public async Task<IActionResult> DeleteCourse(string title, CourseDto courseDto)
@@ -236,7 +267,6 @@ namespace Lms.Api.Controllers
             uow.CourseRepository.Remove(course);
 
             mapper.Map(courseDto, course);
-
 
             if (await uow.CompleteAsync())
             {
@@ -252,10 +282,17 @@ namespace Lms.Api.Controllers
 
 
 
+
+
         private bool CourseExists(int id)
         {
             return _context.Course.Any(e => e.Id == id);
         }
+
+
+
+
+
 
 
         private bool CourseTitleExists(string title)
@@ -268,6 +305,8 @@ namespace Lms.Api.Controllers
 
 
 
+
+        // Filtering courses list by startDate
         //[HttpGet()]
         //public ActionResult<IEnumerable<CourseDto>> GetFilteredCourses(DateTime startDate)
         //{
@@ -280,6 +319,11 @@ namespace Lms.Api.Controllers
         //}
 
 
+
+
+
+
+        //Patch
         [HttpPatch("{courseName}")]
         public async Task<ActionResult<CourseDto>> PatchCourse (string courseName, JsonPatchDocument<CourseDto> patchDocument)
         {

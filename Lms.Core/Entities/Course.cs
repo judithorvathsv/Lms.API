@@ -14,6 +14,7 @@ namespace Lms.Core.Entities
         [Required]
         [MinLength(3), MaxLength(20)]
         public string Title { get; set; }
+
         public DateTime StartDate { get; set; }
 
         public ICollection<Module> Modules { get; set; }

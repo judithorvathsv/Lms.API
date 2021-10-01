@@ -10,7 +10,7 @@ namespace Lms.Core.Repositories
     {
       public ICourseRepository CourseRepository { get; }
       public IModuleRepository ModuleRepository { get; }
-        Task<bool> CompleteAsync();
+      Task<bool> CompleteAsync();
 
     }
 }

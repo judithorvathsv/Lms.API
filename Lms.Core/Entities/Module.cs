@@ -14,9 +14,11 @@ namespace Lms.Core.Entities
         [Required]
         [MinLength(3), MaxLength(20)]
         public string Title { get; set; }
+
         public DateTime StartDate { get; set; }
 
         public int CourseId { get; set; }
+
         public Course Course { get; set; }
     }
 }

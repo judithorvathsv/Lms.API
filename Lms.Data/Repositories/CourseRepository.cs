@@ -16,6 +16,7 @@ namespace Lms.Data.Repositories
         internal readonly LmsApiContext db;
         internal readonly DbSet<Course> dbSet;
 
+
         public CourseRepository(LmsApiContext db)
         {
             this.db = db ?? throw new ArgumentNullException(nameof(db));
@@ -26,6 +27,7 @@ namespace Lms.Data.Repositories
         public async Task<IEnumerable<Course>> GetAllCourses() {
             return await dbSet.Include(m=>m.Modules).ToListAsync();
         }
+
 
         public async Task<IEnumerable<Course>> GetAllCoursesWithOrWithoutModules(bool includeModules)
         {
@@ -75,10 +77,10 @@ namespace Lms.Data.Repositories
         }
 
 
-
         public IEnumerable<Course> GetFilteredCourses(DateTime startDate) {
             return dbSet.Where(a => a.StartDate == startDate).ToList();
         }
+
 
         public bool CourseExists(int courseId)
         {
@@ -86,7 +88,6 @@ namespace Lms.Data.Repositories
             {
                 throw new ArgumentNullException(nameof(courseId));
             }
-
             return db.Course.Any(a => a.Id == courseId);
         }
     }

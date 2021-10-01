@@ -13,11 +13,15 @@ namespace Lms.Core.Dto
         [Required]
         [MinLength(3), MaxLength(20)]
         public string Title { get; set; }
+
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get { return StartDate.AddMonths(3); }
-                                    set { } }
+
+        public DateTime EndDate 
+        { 
+          get { return StartDate.AddMonths(3); }
+          set { } 
+        }
 
         public ICollection<ModuleDto> Modules { get; set; }
-
     }
 }

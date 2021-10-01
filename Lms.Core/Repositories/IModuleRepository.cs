@@ -9,9 +9,7 @@ namespace Lms.Core.Repositories
 {
     public interface IModuleRepository
     {
-        public Task<IEnumerable<Module>> GetAllModule();
-
-       
+        public Task<IEnumerable<Module>> GetAllModule();      
 
         public Task<Module> GetModule(int? id);
 

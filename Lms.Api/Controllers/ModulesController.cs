@@ -32,8 +32,11 @@ namespace Lms.Api.Controllers
         }
 
 
+
+
+
         /*
-        To get Modules in a list
+        1.) To get Modules in a list
         // GET: api/Modules
         [HttpGet]
         //public async Task<ActionResult<IEnumerable<Module>>> GetModule()
@@ -43,6 +46,7 @@ namespace Lms.Api.Controllers
             return await uow.ModuleRepository.GetAllModule();
         }
         */
+
         // GET: api/Modules
         [HttpGet]
          
@@ -58,8 +62,9 @@ namespace Lms.Api.Controllers
 
 
 
+
         /*
-        To get one module by id
+        1.) To get one module by id
         // GET: api/Modules/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Module>> GetModule(int id)
@@ -77,6 +82,7 @@ namespace Lms.Api.Controllers
         */
 
         /*
+        2.) To get one module by title 
         // GET: api/Modules/5
         [HttpGet("{title}")]
         public async Task<ActionResult<ModuleDto>> GetModule(string title)
@@ -94,6 +100,7 @@ namespace Lms.Api.Controllers
             return moduleDto;
         }
         */
+
         // Find a modul by course name and module name together
         [HttpGet("{courseTitle}", Name = "GetModuleToCreateItToACourse")]
         public async Task<ActionResult<ModuleDto>> GetModule(string moduleTitle, string courseTitle)
@@ -112,8 +119,13 @@ namespace Lms.Api.Controllers
         }
 
 
+
+
+
+
+
         /*
-         * Modify one module
+         1.) Modify one module
          // PUT: api/Modules/5
          // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
          [HttpPut("{id}")]
@@ -146,6 +158,7 @@ namespace Lms.Api.Controllers
              return NoContent();
          }
         */
+
         //Modify one module
         // PUT: api/Modules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -168,8 +181,11 @@ namespace Lms.Api.Controllers
 
 
 
+
+
+
         /*
-         Add a module
+         1.) Add a module
          // POST: api/Modules
          // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
          [HttpPost]
@@ -186,6 +202,7 @@ namespace Lms.Api.Controllers
         */
 
         /*
+         2.) Add a module
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -225,8 +242,7 @@ namespace Lms.Api.Controllers
 
             //var moduleToReturn = mapper.Map<ModuleDto>(moduleEntity);
            
-            //return CreatedAtRoute("GetModuleToCreateItToACourse", new { courseId = courseId}, moduleToReturn);
-        
+            //return CreatedAtRoute("GetModuleToCreateItToACourse", new { courseId = courseId}, moduleToReturn);        
         }
 
 
@@ -235,8 +251,8 @@ namespace Lms.Api.Controllers
 
 
 
-
         /*
+        1.) Delete one module by id
         // DELETE: api/Modules/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteModule(int id)
@@ -257,6 +273,7 @@ namespace Lms.Api.Controllers
             return NoContent();
         }
         */
+
         // DELETE: api/Modules/5
         [HttpDelete("{title}")]
         public async Task<IActionResult> DeleteModule(string title, ModuleDto moduleDto)
@@ -283,12 +300,23 @@ namespace Lms.Api.Controllers
         }
 
 
+
+
+
+
+
         private bool ModuleExists(int id)
         {
             return _context.Module.Any(e => e.Id == id);
         }
 
 
+
+
+
+
+
+        //Patch
         [HttpPatch("{moduleName}")]
         public async Task<ActionResult<ModuleDto>> PatchModule(string moduleName, JsonPatchDocument<ModuleDto> patchDocument)
         {
