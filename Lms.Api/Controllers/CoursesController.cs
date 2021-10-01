@@ -36,19 +36,9 @@ namespace Lms.Api.Controllers
 
 
 
-        /*
-        1.) To get Courses  in list without CourseDto
+  
         // GET: api/Courses
-        [HttpGet]
-        //public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
-        public async Task<IEnumerable<Course>> GetCourse()
-        {
-            //return await _context.Course.ToListAsync();
-            return await uow.CourseRepository.GetAllCourses();
-        }
-        */
-        // GET: api/Courses
-         //2.) To get Courses  in list with CourseDto
+         // To get Courses  in list 
         [HttpGet]
          public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
          {
@@ -87,8 +77,7 @@ namespace Lms.Api.Controllers
         // GET: api/Courses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
-        {
-            //var course = await _context.Course.FindAsync(id);
+        {        
             var course = await uow.CourseRepository.FindAsync(id);
 
             if (course == null)
@@ -100,7 +89,7 @@ namespace Lms.Api.Controllers
         */
 
         // GET: api/Courses/5
-        //get one course by title
+        //2.) To get one course by title
         [HttpGet("{title}")]
         public async Task<ActionResult<CourseDto>> GetCourseAsync(string title)
         {
@@ -138,8 +127,7 @@ namespace Lms.Api.Controllers
             _context.Entry(course).State = EntityState.Modified;
 
             try
-            {
-                // await _context.SaveChangesAsync();
+            {               
                 await uow.CompleteAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -182,23 +170,7 @@ namespace Lms.Api.Controllers
 
 
 
-        /*
-        1.) Add a course without CourseDto
-         // POST: api/Courses
-         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-         [HttpPost]
-         public async Task<ActionResult<Course>> PostCourse(Course course)
-         {
-             //_context.Course.Add(course);
-             uow.CourseRepository.Add(course);
-
-             //await _context.SaveChangesAsync();
-             await uow.CompleteAsync();
-
-             return CreatedAtAction("GetCourse", new { id = course.Id }, course);
-         }
-        */
-        //2.) Add a course with CourseDto
+        //2.) Add a course
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -235,19 +207,15 @@ namespace Lms.Api.Controllers
             // DELETE: api/Courses/5
             [HttpDelete("{id}")]
             public async Task<IActionResult> DeleteCourse(int id)
-            {
-                //var course = await _context.Course.FindAsync(id);
+            {                
                 var course = await uow.CourseRepository.FindAsync(id);
 
                 if (course == null)
                 {
                     return NotFound();
                 }
-
-                //_context.Course.Remove(course);
-                uow.CourseRepository.Remove(course);
-
-                //await _context.SaveChangesAsync();
+              
+                uow.CourseRepository.Remove(course);               
                 await uow.CompleteAsync();
 
                 return NoContent();
