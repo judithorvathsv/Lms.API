@@ -35,19 +35,9 @@ namespace Lms.Api.Controllers
 
 
 
-        /*
-        1.) To get Modules in a list without ModuleDto
-        // GET: api/Modules
-        [HttpGet]
-        //public async Task<ActionResult<IEnumerable<Module>>> GetModule()
-        public async Task<IEnumerable<Module>> GetModule()
-        {
-            //return await _context.Module.ToListAsync();
-            return await uow.ModuleRepository.GetAllModule();
-        }
-        */
 
-        //  2.) To get Modules in a list with ModuleDto
+
+        // To get Modules in a list 
         // GET: api/Modules
         [HttpGet]         
         public async Task<ActionResult<IEnumerable<ModuleDto>>> GetModules()
@@ -68,8 +58,7 @@ namespace Lms.Api.Controllers
         // GET: api/Modules/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Module>> GetModule(int id)
-        {
-            //var @module = await _context.Module.FindAsync(id);
+        {           
             var @module = await uow.ModuleRepository.FindAsync(id);
 
             if (@module == null)
@@ -139,8 +128,7 @@ namespace Lms.Api.Controllers
              _context.Entry(@module).State = EntityState.Modified;
 
              try
-             {
-                 //await _context.SaveChangesAsync();
+             {                
                  await uow.CompleteAsync();
              }
              catch (DbUpdateConcurrencyException)
@@ -184,25 +172,10 @@ namespace Lms.Api.Controllers
 
 
 
-        /*
-         1.) Add a module without ModuleDto and course
-         // POST: api/Modules
-         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-         [HttpPost]
-         public async Task<ActionResult<Module>> PostModule(Module @module)
-         {
-             //_context.Module.Add(@module);
-              uow.ModuleRepository.Add(@module);
 
-             //await _context.SaveChangesAsync();
-             await uow.CompleteAsync();
-
-             return CreatedAtAction("GetModule", new { id = @module.Id }, @module);
-         }
-        */
 
         /*
-         2.) Add a module with ModuleDto but without course
+         1.) Add a module without course
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -218,7 +191,7 @@ namespace Lms.Api.Controllers
         }
         */
 
-        //3.) Add a module with ModuleDto and course
+        //2.) Add a module with course
         [HttpPost]   
         public async Task<ActionResult<ModuleDto>> CreateModuleForCourseAsync(int courseId, ModuleForCreationDto moduleForCreationDto)
         {
@@ -253,18 +226,13 @@ namespace Lms.Api.Controllers
         // DELETE: api/Modules/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteModule(int id)
-        {
-            //var @module = await _context.Module.FindAsync(id);
+        {           
             var @module = await uow.ModuleRepository.FindAsync(id);
             if (@module == null)
             {
                 return NotFound();
-            }
-
-            //_context.Module.Remove(@module);
-            uow.ModuleRepository.Remove(@module);
-
-            //await _context.SaveChangesAsync();
+            }     
+            uow.ModuleRepository.Remove(@module);     
             await uow.CompleteAsync();
 
             return NoContent();
