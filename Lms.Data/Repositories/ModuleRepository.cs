@@ -26,8 +26,7 @@ namespace Lms.Data.Repositories
 
 
         public async Task<IEnumerable<Module>> GetAllModule()
-        {
-            // return await dbSet.ToListAsync();
+        {     
             return await dbSet.ToListAsync();
         }
             
@@ -39,8 +38,7 @@ namespace Lms.Data.Repositories
 
 
         public async Task<Module> GetModuleAsync(string title)
-        {
-            //var query = dbSet.AsQueryable();
+        {       
             var query = dbSet.Include(c=>c.Course).AsQueryable();
             return await query.FirstOrDefaultAsync(e => e.Title == title);
         }

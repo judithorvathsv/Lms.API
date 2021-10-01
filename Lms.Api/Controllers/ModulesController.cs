@@ -36,7 +36,7 @@ namespace Lms.Api.Controllers
 
 
         /*
-        1.) To get Modules in a list
+        1.) To get Modules in a list without ModuleDto
         // GET: api/Modules
         [HttpGet]
         //public async Task<ActionResult<IEnumerable<Module>>> GetModule()
@@ -47,9 +47,9 @@ namespace Lms.Api.Controllers
         }
         */
 
+        //  2.) To get Modules in a list with ModuleDto
         // GET: api/Modules
-        [HttpGet]
-         
+        [HttpGet]         
         public async Task<ActionResult<IEnumerable<ModuleDto>>> GetModules()
         {     
             var module = await uow.ModuleRepository.GetAllModule();
@@ -101,7 +101,7 @@ namespace Lms.Api.Controllers
         }
         */
 
-        // Find a modul by course name and module name together
+        // 3.) Find a modul by course name and module name together
         [HttpGet("{courseTitle}", Name = "GetModuleToCreateItToACourse")]
         public async Task<ActionResult<ModuleDto>> GetModule(string moduleTitle, string courseTitle)
         {
@@ -125,7 +125,7 @@ namespace Lms.Api.Controllers
 
 
         /*
-         1.) Modify one module
+         1.) Modify one module by id
          // PUT: api/Modules/5
          // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
          [HttpPut("{id}")]
@@ -159,7 +159,7 @@ namespace Lms.Api.Controllers
          }
         */
 
-        //Modify one module
+        //Modify one module by title
         // PUT: api/Modules/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{title}")]
@@ -185,7 +185,7 @@ namespace Lms.Api.Controllers
 
 
         /*
-         1.) Add a module
+         1.) Add a module without ModuleDto and course
          // POST: api/Modules
          // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
          [HttpPost]
@@ -202,7 +202,7 @@ namespace Lms.Api.Controllers
         */
 
         /*
-         2.) Add a module
+         2.) Add a module with ModuleDto but without course
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -218,6 +218,7 @@ namespace Lms.Api.Controllers
         }
         */
 
+        //3.) Add a module with ModuleDto and course
         [HttpPost]   
         public async Task<ActionResult<ModuleDto>> CreateModuleForCourseAsync(int courseId, ModuleForCreationDto moduleForCreationDto)
         {
@@ -238,11 +239,7 @@ namespace Lms.Api.Controllers
             else
             {
                 return StatusCode(500);
-            }
-
-            //var moduleToReturn = mapper.Map<ModuleDto>(moduleEntity);
-           
-            //return CreatedAtRoute("GetModuleToCreateItToACourse", new { courseId = courseId}, moduleToReturn);        
+            }        
         }
 
 

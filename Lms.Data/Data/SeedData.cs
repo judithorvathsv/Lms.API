@@ -15,13 +15,11 @@ namespace Lms.Data.Data
         private static LmsApiContext db;
         private static Faker fake;
 
-        //public static async Task InitAsync(LmsApiContext context, IServiceProvider services)        
+      
         public static async Task InitAsync(IServiceProvider services)
         {
             using (var db = services.GetRequiredService<LmsApiContext>())
             {
-                //if (context is null) throw new NullReferenceException(nameof(LmsApiContext));
-                //db = context;
 
                 if (db.Course.Any()) return;
 

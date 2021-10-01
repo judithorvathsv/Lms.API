@@ -16,27 +16,7 @@ namespace Lms.Api
 {
     public class Program
     {
-
-        /*
-        public static void Main(string[] args)
-        {
-           var host= CreateHostBuilder(args).Build();
-            try
-            {
-                SeedData.InitAsync(services).Wait();
-            }
-            catch (Exception e)
-            {              
-               
-            }      
-            
-            
-            
-            host.Run();
-        }
-        */
-
-        public static void Main(string[] args)
+       public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 

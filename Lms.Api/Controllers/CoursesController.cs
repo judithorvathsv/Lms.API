@@ -37,7 +37,7 @@ namespace Lms.Api.Controllers
 
 
         /*
-        1.) To get Courses  in list 
+        1.) To get Courses  in list without CourseDto
         // GET: api/Courses
         [HttpGet]
         //public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
@@ -48,8 +48,8 @@ namespace Lms.Api.Controllers
         }
         */
         // GET: api/Courses
-        
-         [HttpGet]
+         //2.) To get Courses  in list with CourseDto
+        [HttpGet]
          public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
          {
              var course = await uow.CourseRepository.GetAllCourses();
@@ -100,7 +100,7 @@ namespace Lms.Api.Controllers
         */
 
         // GET: api/Courses/5
-        //get a course by title
+        //get one course by title
         [HttpGet("{title}")]
         public async Task<ActionResult<CourseDto>> GetCourseAsync(string title)
         {
@@ -124,7 +124,7 @@ namespace Lms.Api.Controllers
 
 
         /*
-        1.) To modify one course    
+        1.) To modify one course by id   
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -183,7 +183,7 @@ namespace Lms.Api.Controllers
 
 
         /*
-        1.) Add a course 
+        1.) Add a course without CourseDto
          // POST: api/Courses
          // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
          [HttpPost]
@@ -198,7 +198,7 @@ namespace Lms.Api.Controllers
              return CreatedAtAction("GetCourse", new { id = course.Id }, course);
          }
         */
-
+        //2.) Add a course with CourseDto
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -222,8 +222,6 @@ namespace Lms.Api.Controllers
             {
                 return StatusCode(500);
             }
-          //  await uow.CompleteAsync();
-         //   return CreatedAtAction("GetCourse", new { id = course.Id }, course);
         }
 
 
@@ -233,7 +231,7 @@ namespace Lms.Api.Controllers
 
 
         /*
-         1.) Delete a course 
+         1.) Delete a course by id
             // DELETE: api/Courses/5
             [HttpDelete("{id}")]
             public async Task<IActionResult> DeleteCourse(int id)
@@ -255,7 +253,7 @@ namespace Lms.Api.Controllers
                 return NoContent();
             }
         */
-
+         // 2.) Delete a course by title
         // DELETE: api/Courses/5
         [HttpDelete("{title}")]
         public async Task<IActionResult> DeleteCourse(string title, CourseDto courseDto)
